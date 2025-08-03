@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>2008 Financial Crisis and Global GDP</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .scene {
+            display: none;
+        }
+        .active {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            grid-gap: 20px;
+            align-items: start;
+        }
+        svg {
+            border: 1px solid #ccc;
+        }
+        #country-select {
+            margin: 10px 0;
+        }
+        .button-container {
+            margin-top: 20px;
+            text-align: right;
+        }
+        .chart-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .text-container {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+    </style>
+</head>
+<body>
+    <h1>2008 Financial Crisis and Global GDP</h1>
+
+    <div class="button-container">
+        <button id="previous">Previous</button>
+        <button id="next">Next</button>
+    </div>
+
+    <div id="scene-1" class="scene active">
+        <div class="chart-container">
+            <div id="line-chart"></div>
+        </div>
+        <div class="text-container">
+            <h2>1: GDP Over Time</h2>
+            <p>This visualization shows the global trend of DGP over time. As you can see, life expectancy has generally been increasing, with a slight drop following the 2008 Financial Crisis.</p>
+        </div>
+    </div>
+
+    <div id="scene-2" class="scene">
+        <div class="chart-container">
+            <div id="region-chart"></div>
+        </div>
+        <div class="text-container">
+            <h2>2: Decrease in GDP by Region (2008-2009)</h2>
+            <p>This chart displays the decrease in life expectancy by region between 2008 and 2009, highlighting the impact of the 2008 Financial Crisis on different regions.</p>
+        </div>
+    </div>
+
+    <div id="scene-3" class="scene">
+        <div class="chart-container">
+            <div id="country-chart"></div>
+        </div>
+        <div class="text-container">
+            <h2>3: GDP over Time by Country</h2>
+            <p>Select any country to explore how GDP evolves in each nation, as well as the impact of the 2008 Financial Crisis. </p>
+            <select id="country-select">
+                <option value="">Select a country</option>
+            </select>
+        </div>
+    </div>
+
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-annotation/2.0.0/d3-annotation.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
