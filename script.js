@@ -68,8 +68,8 @@ async function init() {
         d3.select("#line-chart").selectAll("*").remove();
 
         const svg = d3.select("#line-chart").append("svg")
-            .attr("width", 800)
-            .attr("height", 600);
+            .attr("width", 1000)
+            .attr("height", 800);
         console.log("SVG created for line chart"); // Debugging
         const margin = { top: 20, right: 30, bottom: 60, left: 50 };
         const width = +svg.attr("width") - margin.left - margin.right;
@@ -146,8 +146,8 @@ async function init() {
         d3.select("#region-chart").selectAll("*").remove();
 
         const svg = d3.select("#region-chart").append("svg")
-            .attr("width", 800)
-            .attr("height", 600);
+            .attr("width", 1000)
+            .attr("height", 800);
 
         const margin = { top: 20, right: 30, bottom: 100, left: 50 };
         const width = +svg.attr("width") - margin.left - margin.right;
@@ -176,7 +176,7 @@ async function init() {
             .attr("y", d => y(d.GDP))
             .attr("width", x.bandwidth())
             .attr("height", d => height - y(d.GDP))
-            .attr("fill", "steelblue");
+            .attr("fill", "red");
     }
 
     function createCountryChart(data) {
@@ -186,8 +186,8 @@ async function init() {
         d3.select("#country-chart").selectAll("*").remove();
         
         const svg = d3.select("#country-chart").append("svg")
-            .attr("width", 800)
-            .attr("height", 600);
+            .attr("width", 1000)
+            .attr("height", 800);
     
         const margin = { top: 20, right: 30, bottom: 60, left: 50 };
         const width = +svg.attr("width") - margin.left - margin.right;
