@@ -35,7 +35,7 @@ async function init() {
     countrySelect.selectAll("option")
         .data(countries)
         .enter().append("option")
-        .attr("GDP", d => d)
+        .attr("value", d => d)
         .text(d => d);
 
     // Add event listeners to buttons
@@ -58,7 +58,7 @@ async function init() {
     });
 
     d3.select("#country-select").on("change", function() {
-        const selectedCountry = d3.select(this).property("GDP");
+        const selectedCountry = d3.select(this).property("value");
         updateCountryChart(selectedCountry);
     });
 
