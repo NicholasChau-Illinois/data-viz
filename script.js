@@ -68,10 +68,10 @@ async function init() {
         d3.select("#line-chart").selectAll("*").remove();
 
         const svg = d3.select("#line-chart").append("svg")
-            .attr("width", 1000)
+            .attr("width", 800)
             .attr("height", 800);
         console.log("SVG created for line chart"); // Debugging
-        const margin = { top: 20, right: 30, bottom: 60, left: 50 };
+        const margin = { top: 20, right: 30, bottom: 80, left: 80 };
         const width = +svg.attr("width") - margin.left - margin.right;
         const height = +svg.attr("height") - margin.top - margin.bottom;
         console.log("Width:", width, "Height:", height); // Debugging
@@ -102,7 +102,7 @@ async function init() {
         g.append("path")
             .datum(data)
             .attr("fill", "none")
-            .attr("stroke", "steelblue")
+            .attr("stroke", "green")
             .attr("stroke-width", 1.5)
             .attr("d", line);
         console.log("Path created for line chart"); // Debugging
@@ -146,10 +146,10 @@ async function init() {
         d3.select("#region-chart").selectAll("*").remove();
 
         const svg = d3.select("#region-chart").append("svg")
-            .attr("width", 1000)
+            .attr("width", 800)
             .attr("height", 800);
 
-        const margin = { top: 20, right: 30, bottom: 100, left: 50 };
+        const margin = { top: 20, right: 30, bottom: 100, left: 90 };
         const width = +svg.attr("width") - margin.left - margin.right;
         const height = +svg.attr("height") - margin.top - margin.bottom;
 
@@ -176,7 +176,7 @@ async function init() {
             .attr("y", d => y(d.GDP))
             .attr("width", x.bandwidth())
             .attr("height", d => height - y(d.GDP))
-            .attr("fill", "red");
+            .attr("fill", "green");
     }
 
     function createCountryChart(data) {
@@ -186,10 +186,10 @@ async function init() {
         d3.select("#country-chart").selectAll("*").remove();
         
         const svg = d3.select("#country-chart").append("svg")
-            .attr("width", 1000)
+            .attr("width", 800)
             .attr("height", 800);
     
-        const margin = { top: 20, right: 30, bottom: 60, left: 50 };
+        const margin = { top: 20, right: 30, bottom: 80, left: 90 };
         const width = +svg.attr("width") - margin.left - margin.right;
         const height = +svg.attr("height") - margin.top - margin.bottom;
     
@@ -226,7 +226,7 @@ async function init() {
         g.append("path")
             .datum(data)
             .attr("fill", "none")
-            .attr("stroke", "steelblue")
+            .attr("stroke", "green")
             .attr("stroke-width", 1.5)
             .attr("d", line);
     
