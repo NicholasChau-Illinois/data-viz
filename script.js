@@ -71,7 +71,7 @@ async function init() {
             .attr("width", 800)
             .attr("height", 800);
         console.log("SVG created for line chart"); // Debugging
-        const margin = { top: 20, right: 30, bottom: 80, left: 80 };
+        const margin = { top: 20, right: 30, bottom: 150, left: 100 };
         const width = +svg.attr("width") - margin.left - margin.right;
         const height = +svg.attr("height") - margin.top - margin.bottom;
         console.log("Width:", width, "Height:", height); // Debugging
@@ -149,7 +149,7 @@ async function init() {
             .attr("width", 800)
             .attr("height", 800);
 
-        const margin = { top: 20, right: 30, bottom: 100, left: 90 };
+        const margin = { top: 20, right: 30, bottom: 150, left: 100 };
         const width = +svg.attr("width") - margin.left - margin.right;
         const height = +svg.attr("height") - margin.top - margin.bottom;
 
@@ -189,7 +189,7 @@ async function init() {
             .attr("width", 800)
             .attr("height", 800);
     
-        const margin = { top: 20, right: 30, bottom: 80, left: 90 };
+        const margin = { top: 20, right: 30, bottom: 150, left: 100 };
         const width = +svg.attr("width") - margin.left - margin.right;
         const height = +svg.attr("height") - margin.top - margin.bottom;
     
