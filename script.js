@@ -181,10 +181,10 @@ async function init() {
 
     function createCountryChart(data) {
         console.log("Creating country chart..."); // Debugging
-    
+        console.log("Country Data:", data); // Debugging
         // Clear existing SVG content
         d3.select("#country-chart").selectAll("*").remove();
-    
+        
         const svg = d3.select("#country-chart").append("svg")
             .attr("width", 800)
             .attr("height", 600);
