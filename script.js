@@ -7,18 +7,18 @@ async function init() {
     // Load data
     const globalData = await d3.csv("world_gdp.csv", d => ({
         Year: +d.Year,
-        GDP: +d.Value
+        GDP: +d.GDP
     }));
 
     const regionData = await d3.csv("region_gdp.csv", d => ({
         Region: d.Region,
-        GDP: +d.Value
+        GDP: +d.GDP
     }));
 
     const countryData = await d3.csv("gdp_csv.csv", d => ({
         Country: d.Country,
         Year: +d.Year,
-        GDP: +d.Value
+        GDP: +d.GDP
     }));
 
     // Log data to verify
@@ -35,7 +35,7 @@ async function init() {
     countrySelect.selectAll("option")
         .data(countries)
         .enter().append("option")
-        .attr("value", d => d)
+        .attr("GDP", d => d)
         .text(d => d);
 
     // Add event listeners to buttons
@@ -58,7 +58,7 @@ async function init() {
     });
 
     d3.select("#country-select").on("change", function() {
-        const selectedCountry = d3.select(this).property("value");
+        const selectedCountry = d3.select(this).property("GDP");
         updateCountryChart(selectedCountry);
     });
 
@@ -70,48 +70,48 @@ async function init() {
         const svg = d3.select("#line-chart").append("svg")
             .attr("width", 800)
             .attr("height", 600);
-
+        console.log("SVG created for line chart"); // Debugging
         const margin = { top: 20, right: 30, bottom: 60, left: 50 };
         const width = +svg.attr("width") - margin.left - margin.right;
         const height = +svg.attr("height") - margin.top - margin.bottom;
-
+        console.log("Width:", width, "Height:", height); // Debugging
         const g = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
-
+        console.log("Group element created for line chart"); // Debugging
         const x = d3.scaleTime()
             .domain(d3.extent(data, d => new Date(d.Year, 0, 1)))
             .range([0, width]);
-
+        
         const y = d3.scaleLinear()
-            .domain([d3.min(data, d => d.Value), d3.max(data, d => d.Value)])
+            .domain([d3.min(data, d => d.GDP), d3.max(data, d => d.GDP)])
             .range([height, 0]);
-
+        console.log("X Domain:", d3.extent(data, d => new Date(d.Year, 0, 1))); // Debugging
         const line = d3.line()
             .x(d => x(new Date(d.Year, 0, 1)))
-            .y(d => y(d.Value));
-
+            .y(d => y(d.GDP));
+        console.log("Line function created"); // Debugging
         g.append("g")
             .attr("transform", `translate(0,${height})`)
             .call(d3.axisBottom(x).tickFormat(d3.timeFormat("%Y")).tickSize(0))
             .selectAll("text")
             .attr("transform", "rotate(-45)")
             .style("text-anchor", "end");
-
+        
         g.append("g")
             .call(d3.axisLeft(y));
-
+        console.log("Axes created for line chart"); // Debugging
         g.append("path")
             .datum(data)
             .attr("fill", "none")
             .attr("stroke", "steelblue")
             .attr("stroke-width", 1.5)
             .attr("d", line);
-
+        console.log("Path created for line chart"); // Debugging
         // Annotation for 2008 Financial Crisis
         const crisisAnnotationData = data.find(d => d.Year === 2008);
-
+        console.log("Crisis Annotation Data:", crisisAnnotationData); // Debugging
         if (crisisAnnotationData) {
             const crisisAnnotationX = x(new Date(2008, 0, 1));
-            const crisisAnnotationY = y(crisisAnnotationData.Value);
+            const crisisAnnotationY = y(crisisAnnotationData.GDP);
             console.log(`Crisis Annotation - X: ${crisisAnnotationX}, Y: ${crisisAnnotationY}`); // Debugging
 
             const annotations = [
@@ -136,7 +136,7 @@ async function init() {
                 .attr("class", "annotation-group")
                 .call(makeAnnotations);
         } else {
-            console.warn("No data found for 2019 to annotate.");
+            console.warn("No data found for 2008 to annotate.");
         }
     }
 
@@ -156,7 +156,7 @@ async function init() {
         const g = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
 
         const x = d3.scaleBand().domain(data.map(d => d.Region)).range([0, width]).padding(0.1);
-        const y = d3.scaleLinear().domain([0, d3.max(data, d => d.Value)]).range([height, 0]);
+        const y = d3.scaleLinear().domain([0, d3.max(data, d => d.GDP)]).range([height, 0]);
 
         g.append("g")
             .attr("transform", `translate(0,${height})`)
@@ -173,9 +173,9 @@ async function init() {
             .enter().append("rect")
             .attr("class", "bar")
             .attr("x", d => x(d.Region))
-            .attr("y", d => y(d.Value))
+            .attr("y", d => y(d.GDP))
             .attr("width", x.bandwidth())
-            .attr("height", d => height - y(d.Value))
+            .attr("height", d => height - y(d.GDP))
             .attr("fill", "steelblue");
     }
 
@@ -196,7 +196,7 @@ async function init() {
         const g = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
     
         const xDomain = d3.extent(data, d => new Date(d.Year, 0, 1));
-        const yDomain = [d3.min(data, d => d.Value), d3.max(data, d => d.Value)];
+        const yDomain = [d3.min(data, d => d.GDP), d3.max(data, d => d.GDP)];
     
         console.log("X Domain:", xDomain); // Debugging
         console.log("Y Domain:", yDomain); // Debugging
@@ -211,7 +211,7 @@ async function init() {
     
         const line = d3.line()
             .x(d => x(new Date(d.Year, 0, 1)))
-            .y(d => y(d.Value));
+            .y(d => y(d.GDP));
     
         g.append("g")
             .attr("transform", `translate(0,${height})`)
@@ -234,7 +234,7 @@ async function init() {
         const crisisAnnotationData = data.find(d => d.Year === 2008);
         if (crisisAnnotationData) {
             const crisisAnnotationX = x(new Date(2008, 0, 1));
-            const crisisAnnotationY = y(crisisAnnotationData.Value);
+            const crisisAnnotationY = y(crisisAnnotationData.GDP);
             console.log(`2008 Annotation - X: ${crisisAnnotationX}, Y: ${crisisAnnotationY}`); // Debugging
     
             const annotations = [
@@ -259,7 +259,7 @@ async function init() {
                 .attr("class", "annotation-group")
                 .call(makeAnnotations);
         } else {
-            console.warn("No data found for 2019 to annotate.");
+            console.warn("No data found for 2008 to annotate.");
         }
     }
     
