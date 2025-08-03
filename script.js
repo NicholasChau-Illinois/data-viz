@@ -7,18 +7,18 @@ async function init() {
     // Load data
     const globalData = await d3.csv("world_gdp.csv", d => ({
         Year: +d.Year,
-        GDP: +d.GDP
+        GDP: d.GDP === "" || isNaN(+d.GDP) ? null : +d.GDP
     }));
 
     const regionData = await d3.csv("region_gdp.csv", d => ({
         Region: d.Region,
-        GDP: +d.GDP
+        GDP: d.GDP === "" || isNaN(+d.GDP) ? null : +d.GDP
     }));
 
     const countryData = await d3.csv("gdp_csv.csv", d => ({
         Country: d.Country,
         Year: +d.Year,
-        GDP: +d.GDP
+        GDP: d.GDP === "" || isNaN(+d.GDP) ? null : +d.GDP
     }));
 
     // Log data to verify
